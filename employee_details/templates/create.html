@@ -1,0 +1,47 @@
+{%extends 'layout/layout.html' %}
+{%load static %}
+
+{% block app_css %}
+    <link rel="stylesheet" href="{% static 'employee_details/css/app.css'%}" />
+    <style>
+    .container {
+      max-width: 450px;
+    }
+    </style>
+{%endblock%}
+{% block content %}
+<div class="card push-top">
+  <div class="card-header">
+    Add User
+  </div>
+  
+    <div class="card-body">
+    {%if form_error %}
+     <div class="alert alert-danger">
+        <ul>
+            <li>{{ form_error }}</li>
+        </ul>
+      </div>
+      {% endif %}
+       <br />
+        <form method="POST" action="">
+            <div class="form-group">
+                {% csrf_token %}
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" value="{%if oldval.name%}  {{ oldval.name}} {% endif %} " />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" value="{%if oldval.email%}  {{ oldval.email}} {% endif %}" />
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" class="form-control" name="phone" value="{%if oldval.phone%}  {{ oldval.phone}} {% endif %}" />
+            </div>
+            <button type="submit" class="btn btn-block btn-danger">Create employee</button>
+        </form>
+    </div>
+</div>
+{% endblock%}
+
+
