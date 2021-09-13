@@ -4,6 +4,11 @@
     <div class="float-right mb-2">
         <a href={% url 'employee_create' %} class="btn btn-primary ">Create employee</a>
     </div>
+        {%for messaage in messages %}
+        <div class="alert alert-success float-left w-50">
+            {{messaage}}
+        </div>
+        {%endfor%}
   <table class="table">
     <thead>
         <tr class="table-warning">
@@ -30,6 +35,8 @@
                     </form>
                 </td>
             </tr>
+        {% empty %}
+            <tr><td>No employees Found</td></tr>
         {% endfor %}
         
     </thead>

@@ -1,6 +1,7 @@
 from employee_details.validation_form import EmployeeFieldValidation
 from django.shortcuts import redirect, render
 from .models import Employee
+from django.contrib import messages
 # Create your views here.
 def index(request):
     employees = Employee.objects.all()
@@ -32,6 +33,7 @@ def editEmployee(request,id):
             emp.email = employee_form.cleaned_data['email']
             emp.phone = employee_form.cleaned_data['phone']
             emp.save()
+            messages.info(request,'Employee details updated')
             return redirect('/')
         else:
             context['form_error'] = employee_form.errors.as_text()
@@ -43,5 +45,5 @@ def deleteEmployee(request,id):
     emp  = Employee.objects.get(id = id )
     if(request.method == 'POST'):
         emp.delete()
-    
+        messages.info(request,'Employee deleted')
     return redirect('/')
